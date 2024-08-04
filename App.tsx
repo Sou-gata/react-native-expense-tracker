@@ -1,4 +1,3 @@
-// import "./global.css";
 import "./gesture-handler";
 import { SafeAreaView, StatusBar, useColorScheme, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
