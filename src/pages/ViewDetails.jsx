@@ -1,4 +1,5 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import { Text } from "react-native-paper";
 import React, { useEffect, useState } from "react";
 import connectDB from "../db/connectDB";
 import useToaster from "../useToaster";

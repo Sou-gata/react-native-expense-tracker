@@ -1,7 +1,14 @@
-import { View, Text, Pressable, ScrollView } from "react-native";
+import { View, Pressable, ScrollView } from "react-native";
 import React from "react";
+import { Text } from "react-native-paper";
 
 const Table = ({ navigation, details }) => {
+    if (details.length === 0)
+        return (
+            <View style={{ width: "100%", alignItems: "center" }}>
+                <Text>No data found</Text>
+            </View>
+        );
     return (
         <View style={{ width: "100%" }}>
             <View

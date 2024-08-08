@@ -1,6 +1,6 @@
-import { View, Text, Pressable, ScrollView } from "react-native";
+import { View, Pressable, ScrollView } from "react-native";
 import React, { useState, useEffect } from "react";
-import { Button, Dialog, RadioButton, TextInput } from "react-native-paper";
+import { Button, Dialog, RadioButton, TextInput, Text } from "react-native-paper";
 import connectDB from "../db/connectDB";
 import useToaster from "../useToaster";
 
@@ -18,6 +18,15 @@ const EditData = ({ route, navigation }) => {
     const [visible, setVisible] = useState(false);
     const [value, setValue] = useState({ id: 0, name: "" });
     const handleUpdate = async () => {
+        if (
+            inputs.place === "" ||
+            inputs.purpose === "" ||
+            inputs.by === "" ||
+            inputs.expense === ""
+        ) {
+            toast.error("All fields are required");
+            return;
+        }
         const db = await connectDB();
         let expense = parseFloat(inputs.expense);
         if (isNaN(expense)) {

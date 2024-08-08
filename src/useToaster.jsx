@@ -14,6 +14,13 @@ const useToaster = () => {
                 backgroundColor: "#28a745",
                 borderRadius: 99,
             },
+            messageContainerStyle: {
+                paddingRight: 10,
+            },
+            messageStyle: {
+                fontSize: 14,
+                textAlign: "center",
+            },
         });
     };
     const error = (message) => {
@@ -25,31 +32,16 @@ const useToaster = () => {
                 backgroundColor: "#dc3545",
                 borderRadius: 99,
             },
-        });
-    };
-    const warning = (message) => {
-        show({
-            message,
-            type: "warning",
-            position: "top",
-            snackbarStyle: {
-                backgroundColor: "#ffc107",
-                borderRadius: 99,
+            messageContainerStyle: {
+                paddingRight: 10,
+            },
+            messageStyle: {
+                fontSize: 14,
+                textAlign: "center",
             },
         });
     };
-    const info = (message) => {
-        show({
-            message,
-            type: "info",
-            position: "top",
-            snackbarStyle: {
-                backgroundColor: "#17a2b8",
-                borderRadius: 99,
-            },
-        });
-    };
-    return { show, success, error, warning, info };
+    return { show, success, error };
 };
 
 export default useToaster;

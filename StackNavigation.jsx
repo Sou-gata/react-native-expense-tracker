@@ -6,6 +6,7 @@ import ViewData from "./src/pages/ViewData";
 import EditData from "./src/pages/EditData";
 import AddParticipents from "./src/pages/AddParticipents";
 import ViewDetails from "./src/pages/ViewDetails";
+import PersonalDetails from "./src/pages/PersonalDetails";
 
 const Stack = createStackNavigator();
 
@@ -58,6 +59,15 @@ const StackNavigation = () => {
                 component={ViewDetails}
                 options={{
                     title: "View Details",
+                    animation: "timing",
+                    ...TransitionPresets.SlideFromRightIOS,
+                }}
+            />
+            <Stack.Screen
+                name="PersonalDetails"
+                component={PersonalDetails}
+                options={{
+                    title: "Personal Details",
                     animation: "timing",
                     ...TransitionPresets.SlideFromRightIOS,
                 }}

@@ -27,7 +27,8 @@ const AddData = ({ navigation }) => {
                     (tx, result) => {
                         let temp = [];
                         if (result.rows.length === 0) {
-                            setParticipents([]);
+                            toast.error("No participant found, please add participant first");
+                            navigation.navigate("Home");
                             return;
                         }
                         for (let i = 0; i < result.rows.length; i++) {
@@ -45,6 +46,15 @@ const AddData = ({ navigation }) => {
     }, []);
 
     async function handleSave() {
+        if (
+            inputs.place === "" ||
+            inputs.purpose === "" ||
+            inputs.by === "" ||
+            inputs.expense === ""
+        ) {
+            toast.error("All fields are required");
+            return;
+        }
         const db = await connectDB();
         let expense = parseFloat(inputs.expense);
         if (isNaN(expense)) {
@@ -75,6 +85,7 @@ const AddData = ({ navigation }) => {
                     label="Place"
                     mode="outlined"
                     value={inputs.place}
+                    theme={{ colors: { background: "white" } }}
                     onChangeText={(e) => setInputs({ ...inputs, place: e })}
                 />
                 <TextInput

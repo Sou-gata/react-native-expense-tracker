@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Dialog, FAB, TextInput } from "react-native-paper";
+import { Button, Dialog, FAB, TextInput, Text } from "react-native-paper";
 import Table from "../components/Table";
 import { Context } from "../db/Context";
 import connectDB from "../db/connectDB";
@@ -32,7 +32,7 @@ const Home = ({ navigation }) => {
                         }
                     },
                     (error) => {
-                        toast.error("Error in fetching data");
+                        console.log(error);
                     }
                 );
             });
@@ -55,6 +55,14 @@ const Home = ({ navigation }) => {
                 );
                 tx.executeSql(
                     "DROP TABLE participants",
+                    [],
+                    () => {},
+                    (error) => {
+                        toast.error("Error in deleting table");
+                    }
+                );
+                tx.executeSql(
+                    "DROP TABLE personal",
                     [],
                     () => {
                         setIsOpened(false);

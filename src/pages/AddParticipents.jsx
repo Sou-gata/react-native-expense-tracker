@@ -1,8 +1,8 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { Button, Dialog, TextInput } from "react-native-paper";
+import { Button, Text, Dialog, TextInput } from "react-native-paper";
 import connectDB from "../db/connectDB";
 import useToaster from "../useToaster";
 
@@ -41,6 +41,10 @@ const AddParticipents = () => {
         });
     }
     async function handleUpdate() {
+        if (inputs.editName === "") {
+            toast.error("Name is required");
+            return;
+        }
         setIsOpened({ ...isOpened, edit: false });
         const db = await connectDB();
         db.transaction((tx) => {
@@ -63,6 +67,14 @@ const AddParticipents = () => {
         setIsOpened({ ...isOpened, delete: false });
         const db = await connectDB();
         db.transaction((tx) => {
+            tx.executeSql("SELECT * FROM expense WHERE userId = ?", [ids.delete], (_, result) => {
+                if (result.rows.length > 0) {
+                    toast.error("Participant is in use");
+                    return;
+                }
+            });
+        });
+        db.transaction((tx) => {
             tx.executeSql(
                 "DELETE FROM participants WHERE id = ?",
                 [ids.delete],
@@ -79,6 +91,10 @@ const AddParticipents = () => {
         });
     }
     async function handleAdd() {
+        if (inputs.addName === "") {
+            toast.error("Name is required");
+            return;
+        }
         setIsOpened({ ...isOpened, add: false });
         const db = await connectDB();
         db.transaction((tx) => {

@@ -1,11 +1,11 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Pressable } from "react-native";
 import { useContext, useState } from "react";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { Menu } from "react-native-paper";
+import { Menu, Text } from "react-native-paper";
 import { Context } from "../db/Context";
 
 const Header = (props) => {
@@ -43,7 +43,7 @@ const Header = (props) => {
                     <AntDesign name="arrowleft" size={24} color="white" />
                 </Pressable>
             )}
-            <Text style={{ color: "white", fontSize: 25 }}>{props.options.title}</Text>
+            <Text style={{ color: "white", fontSize: 20 }}>{props.options.title}</Text>
             {props.options.title == "Expense Tracker" && (
                 <Menu
                     visible={visible}
@@ -63,9 +63,7 @@ const Header = (props) => {
                     }
                 >
                     <Menu.Item
-                        leadingIcon={() => (
-                            <FontAwesome6 name="user-large" size={18} color="black" />
-                        )}
+                        leadingIcon={() => <Ionicons name="people" size={18} color="black" />}
                         onPress={() => {
                             props.navigation.navigate("AddParticipents");
                             closeMenu();
@@ -81,6 +79,16 @@ const Header = (props) => {
                             closeMenu();
                         }}
                         title="View Details"
+                    />
+                    <Menu.Item
+                        leadingIcon={() => (
+                            <FontAwesome6 size={20} name="user-large" color="black" />
+                        )}
+                        onPress={() => {
+                            props.navigation.navigate("PersonalDetails");
+                            closeMenu();
+                        }}
+                        title="Personal Details"
                     />
                     <Menu.Item
                         leadingIcon={() => (
